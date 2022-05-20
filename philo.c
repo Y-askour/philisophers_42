@@ -6,13 +6,20 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/20 18:17:55 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/20 18:36:31 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-void	*routine()
+
+void	*routine(void *arg)
 {
-	printf("hey\n");
+	t_philo philo = *(t_philo *)arg;
+	pthread_mutex_lock(&philo.right_fork);
+	printf("philo[%d]     lock right fork \n",philo.id);
+	pthread_mutex_lock(philo.leftfork);
+	printf("philo[%d]     lock  left fork \n",philo.id);
+	sleep(3);
+	printf("starts eating\n");
 	return (NULL);
 }
 
@@ -36,13 +43,13 @@ void	init_philo(t_info *data,t_philo *philos)
 	while(i < data->number_of_philo)
 	{
 		philos[i].id = i + 1;
-		pthread_create(&philos->my_thread,NULL,&routine,NULL);
 		philos[i].right_fork = data->forks[i];
 		if (i == 0)
 			philos->leftfork = &data->forks[data->number_of_philo - 1];
 		else
 			philos->leftfork = &data->forks[i - 1];
 		philos->info = data;
+		pthread_create(&philos->my_thread,NULL,&routine,&philos[i]);
 		i++;
 	}
 }
@@ -70,6 +77,6 @@ int	main(int ac, char **av)
 	philos = malloc(sizeof(t_philo) * data.number_of_philo);
 	init_forks(&data);
 	init_philo(&data,philos);
-	sleep(30);
+	sleep(10);
 }
 
