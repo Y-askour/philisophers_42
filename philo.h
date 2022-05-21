@@ -31,7 +31,7 @@ typedef struct args
 typedef struct philo
 {
   int id;
-  pthread_mutex_t right_fork;
+  pthread_mutex_t *right_fork;
   pthread_mutex_t *leftfork;
   pthread_t     my_thread;
   t_info  *info;
