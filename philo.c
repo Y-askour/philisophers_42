@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/21 18:27:50 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/21 18:41:22 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -14,51 +14,40 @@
 void	*routine(void *arg)
 {
 	t_philo philo = *(t_philo *)arg;
-	//if ((philo.id) % 2)
-	//{
-	//	usleep(10000);
-	//}
 	int i = 0;
 	while(i < 1)
 	{
 		if (philo.id == 1)
 		{
 			pthread_mutex_lock(philo.leftfork);
-			printf("philo[%d]     lock  left fork \n",philo.id);
 			pthread_mutex_lock(philo.right_fork);
-			printf("philo[%d]     lock right fork \n",philo.id);
-			printf("philo[%d]  -------- starts eating\n",philo.id);
+			printf("philo[%d]  -------- start eating\n",philo.id);
 		}
 		else
 		{
 			pthread_mutex_lock(philo.right_fork);
-			printf("philo[%d]     lock right fork \n",philo.id);
 			pthread_mutex_lock(philo.leftfork);
-			printf("philo[%d]     lock  left fork \n",philo.id);
-			printf("philo[%d]  -------- starts eating\n",philo.id);
+			printf("philo[%d]  -------- start eating\n",philo.id);
 		}
-		//usleep(2000);
-		printf("\nphilo[%d] has eating %d\n\n",philo.id,i +1);
-		usleep(philo.info->time_to_eat);
+		usleep(10);
+		//usleep(philo.info->time_to_eat);
 		if (philo.id != 1)
 		{
 			pthread_mutex_unlock(philo.right_fork);
-			printf("philo[%d]     unlock right fork \n",philo.id);
 			pthread_mutex_unlock(philo.leftfork);
-			printf("philo[%d]     unlock left fork \n",philo.id);
+			printf("philo[%d] has eating %d\n",philo.id,i +1);
 		}
 		else
 		{
 			pthread_mutex_unlock(philo.leftfork);
-			printf("philo[%d]     unlock left fork \n",philo.id);
 			pthread_mutex_unlock(philo.right_fork);
-			printf("philo[%d]     unlock right fork \n",philo.id);
+			printf("\nphilo[%d] has eating %d\n",philo.id,i +1);
 		}
-
-		printf("\n----------------------------------\n");
+		printf("philo[%d] start thinking %d\n",philo.id,i +1);
+		usleep(10);
+		printf("----------------------------------\n");
 		i++;
 	}
-	//printf("\n-----------------------------------\n");
 	return (NULL);
 }
 
