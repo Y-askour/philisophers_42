@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:06:19 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/22 19:26:35 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/22 19:40:49 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct args
 	// how many philos that eat must_eat
 	int					eaten;
 	pthread_mutex_t	*forks;
+	long	printtime;
 }	t_info;
 
 typedef struct philo

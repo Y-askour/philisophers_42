@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/22 19:35:45 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/22 19:48:26 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -59,10 +59,6 @@ void	*routine(void *arg)
 		get_mssg(philo.info,philo.id,"is sleeping");
 		usleep(philo.info->time_to_sleep * 1000);
 		get_mssg(philo.info,philo.id,"is thinking");
-
-		//last time eat
-		//thinking
-		//sleeping
 		i++;
 	}
 	return (NULL);
@@ -103,7 +99,8 @@ void	init_philo(t_info *data, t_philo *philos)
 void	get_mssg(t_info *data,int id,char *state)
 {
 	pthread_mutex_lock(&data->write);
-	printf("[ time stamp ] %d %s \n",id,state);
+	data->printtime = get_current_time() - data->start_time;
+	printf("%lu %d %s \n",data->printtime,id,state);
 	pthread_mutex_unlock(&data->write);
 }
 
@@ -112,9 +109,9 @@ int	main(int ac, char **av)
 	t_info	data;
 	t_philo	*philos;
 	int		i;
+	data.stop = 0;
 	data.start_time = get_current_time();
 	pthread_mutex_init(&data.write,NULL);
-	printf("%lu\n",data.start_time);
 	if (!arguments_check(ac, av))
 		return (0);
 	if (!parse_init(&data, ac, av))
