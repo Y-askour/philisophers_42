@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:06:19 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/20 18:05:39 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/22 13:42:10 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ typedef struct args
   int           time_to_eat;
   int           time_to_sleep;
   int           number_of_times_e_philo_must_eat;
+  int           stop;
   pthread_mutex_t *forks;
+  
 
 } t_info;
 
@@ -40,5 +42,8 @@ typedef struct philo
 
 
 
+int	parse(t_info *data,int ac,char **argv);
+int     arguments_check(int argc, char **argv);
+int     parse_init(t_info *args, int argc, char **argv);
 
 #endif
