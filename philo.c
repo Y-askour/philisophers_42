@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/22 14:37:30 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/22 17:15:25 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -29,7 +29,7 @@ int	philo_eat(t_philo *philo, int i)
 		printf("philo[%d] ---- has taken a fork\n", philo->id);
 		printf("philo[%d]  -------- start eating\n", philo->id);
 	}
-	sleep(4);
+	usleep(philo->info->time_to_eat * 1000);
 	if (philo->id != 1)
 	{
 		pthread_mutex_unlock(philo->right_fork);
@@ -57,7 +57,9 @@ void	*routine(void *arg)
 		philo_eat(&philo, i);
 		printf("philo[%d] start thinking %d\n", philo.id, i +1);
 		usleep(10);
-		printf("----------------------------------\n");
+		//last time eat
+		//thinking
+		//sleeping
 		i++;
 	}
 	return (NULL);
@@ -96,31 +98,17 @@ void	init_philo(t_info *data, t_philo *philos)
 	}
 }
 
-int	parse(t_info *data, int ac, char **argv)
-{
-	if (ac < 5 || ac > 6)
-		return (1);
-	data->number_of_philo = ft_atoi(argv[1]);
-	data->time_to_die = ft_atoi(argv[2]);
-	data->time_to_eat = ft_atoi(argv[3]);
-	data->time_to_sleep = ft_atoi(argv[4]);
-	if (ac == 6)
-		data->number_of_times_e_philo_must_eat = ft_atoi(argv[5]);
-	else
-		data->number_of_times_e_philo_must_eat = -1;
-	return (0);
-}
 
 int	main(int ac, char **av)
 {
 	t_info	data;
 	t_philo	*philos;
 	int		i;
+	data.start_time = get_current_time();
 
+	printf("%lu\n",data.start_time);
 	if (!arguments_check(ac, av))
-	{
 		return (0);
-	}
 	if (!parse_init(&data, ac, av))
 	{
 		printf("invalid arguments \n");

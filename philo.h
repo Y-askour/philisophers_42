@@ -6,13 +6,14 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:06:19 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/22 14:42:50 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/22 17:02:17 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 # include <pthread.h>
+#	include <sys/time.h>
 # include "libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
@@ -25,6 +26,7 @@ typedef struct args
 	int				time_to_sleep;
 	int				number_of_times_e_philo_must_eat;
 	int				stop;
+	long				start_time;
 	pthread_mutex_t	*forks;
 }	t_info;
 
@@ -39,5 +41,6 @@ typedef struct philo
 int	parse(t_info *data, int ac, char **argv);
 int	arguments_check(int argc, char **argv);
 int	parse_init(t_info *args, int argc, char **argv);
+long	get_current_time();
 
 #endif
