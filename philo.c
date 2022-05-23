@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/23 11:30:03 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/23 14:49:19 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -82,7 +82,6 @@ void	init_philo(t_info *data, t_philo *philos)
 	int	i;
 
 	i = 0;
-	pthread_create(&data->check_dead,NULL,&check_dead_p,data);
 	while (i < data->number_of_philo)
 	{
 		philos[i].id = i + 1;
@@ -93,6 +92,8 @@ void	init_philo(t_info *data, t_philo *philos)
 			philos[i].leftfork = &data->forks[i - 1];
 		philos[i].info = data;
 		philos[i].num_eat = 0;
+		philos[i].last_meal = philos[i].info->start_time;
+		philos[i].info->stop = 0;
 		pthread_create(&philos[i].my_thread, NULL, &routine, &philos[i]);
 		i++;
 	}
@@ -101,17 +102,30 @@ void	get_mssg(t_info *data,int id,char *state)
 {
 	pthread_mutex_lock(&data->write);
 	data->printtime = get_current_time() - data->start_time;
-	printf("%lu %d %s \n",data->printtime,id,state);
+	printf("%lu       %d   %s \n",data->printtime,id,state);
 	pthread_mutex_unlock(&data->write);
 }
 
 void *check_dead_p(void	*arg)
 {
-	t_info	*info = (t_info *)arg;
+	t_philo	*philos = (t_philo *)arg;
+	t_info	*data;
+	data = philos[0].info;
+	int i ;
 	while(1)
 	{
-		get_mssg(info,50,"                 test allah\n");
-		sleep(1);
+		i = 0;
+		while(i < data->number_of_philo) 
+		{
+			while(get_current_time() - philos[i].last_meal >= data->time_to_die)
+			{
+				data->stop = 1;
+				get_mssg(philos[i].info,1,"died\n");
+				exit(1);
+				sleep(3);
+			}
+			i++;
+		}
 	}
 	return (NULL);
 }
@@ -121,7 +135,6 @@ int	main(int ac, char **av)
 	t_info	data;
 	t_philo	*philos;
 	int		i;
-	data.stop = 0;
 	data.start_time = get_current_time();
 	pthread_mutex_init(&data.write,NULL);
 	if (!arguments_check(ac, av))
@@ -134,6 +147,7 @@ int	main(int ac, char **av)
 	philos = malloc(sizeof(t_philo) * data.number_of_philo);
 	init_forks(&data);
 	init_philo(&data, philos);
+	pthread_create(&data.check_dead,NULL,&check_dead_p,philos);
 	i = 0;
 	while (i < data.number_of_philo)
 	{

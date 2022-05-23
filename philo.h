@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:06:19 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/23 11:03:12 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/23 12:16:40 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct philo
 	pthread_t		my_thread;
 	t_info			*info;
 	int	num_eat;
-	int	last_meal;
+	long	last_meal;
 	int	time_to_kill;
 }	t_philo;
 int	parse(t_info *data, int ac, char **argv);
