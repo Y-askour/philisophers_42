@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/22 19:48:26 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/23 11:30:03 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -16,31 +16,31 @@ int	philo_eat(t_philo *philo, int i)
 	if (philo->id == 1)
 	{
 		pthread_mutex_lock(philo->leftfork);
-		get_mssg(philo->info,philo->id,"has taken a fork");
+		get_mssg(philo->info, philo->id, "has taken a fork");
 		pthread_mutex_lock(philo->right_fork);
-		get_mssg(philo->info,philo->id,"has taken a fork");
+		get_mssg(philo->info, philo->id, "has taken a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(philo->right_fork);
-		get_mssg(philo->info,philo->id,"has taken a fork");
+		get_mssg(philo->info, philo->id, "has taken a fork");
 		pthread_mutex_lock(philo->leftfork);
-		get_mssg(philo->info,philo->id,"has taken a fork");
+		get_mssg(philo->info, philo->id, "has taken a fork");
 	}
-	get_mssg(philo->info,philo->id,"is eating");
+	get_mssg(philo->info, philo->id, "is eating");
 	usleep(philo->info->time_to_eat * 1000);
 	philo->last_meal = get_current_time();
 	if (philo->id != 1)
 	{
 		pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_unlock(philo->leftfork);
-		get_mssg(philo->info,philo->id,"has eating");
+		get_mssg(philo->info, philo->id, "has eating");
 	}
 	else
 	{
 		pthread_mutex_unlock(philo->leftfork);
 		pthread_mutex_unlock(philo->right_fork);
-		get_mssg(philo->info,philo->id,"has eating");
+		get_mssg(philo->info, philo->id, "has eating");
 	}
 	philo->num_eat++;
 	return (0);
@@ -48,17 +48,17 @@ int	philo_eat(t_philo *philo, int i)
 
 void	*routine(void *arg)
 {
-	t_philo	philo;
+	t_philo	*philo;
 	int		i;
 
-	philo = *(t_philo *)arg;
+	philo = (t_philo *)arg;
 	i = 0;
-	while (philo.info->stop == 0)
+	while (philo->info->stop == 0)
 	{
-		philo_eat(&philo, i);
-		get_mssg(philo.info,philo.id,"is sleeping");
-		usleep(philo.info->time_to_sleep * 1000);
-		get_mssg(philo.info,philo.id,"is thinking");
+		philo_eat(philo, i);
+		get_mssg(philo->info,philo->id,"is sleeping");
+		usleep(philo->info->time_to_sleep * 1000);
+		get_mssg(philo->info,philo->id,"is thinking");
 		i++;
 	}
 	return (NULL);
@@ -82,6 +82,7 @@ void	init_philo(t_info *data, t_philo *philos)
 	int	i;
 
 	i = 0;
+	pthread_create(&data->check_dead,NULL,&check_dead_p,data);
 	while (i < data->number_of_philo)
 	{
 		philos[i].id = i + 1;
@@ -102,6 +103,17 @@ void	get_mssg(t_info *data,int id,char *state)
 	data->printtime = get_current_time() - data->start_time;
 	printf("%lu %d %s \n",data->printtime,id,state);
 	pthread_mutex_unlock(&data->write);
+}
+
+void *check_dead_p(void	*arg)
+{
+	t_info	*info = (t_info *)arg;
+	while(1)
+	{
+		get_mssg(info,50,"                 test allah\n");
+		sleep(1);
+	}
+	return (NULL);
 }
 
 int	main(int ac, char **av)
@@ -128,6 +140,7 @@ int	main(int ac, char **av)
 		pthread_join(philos[i].my_thread, NULL);
 		i++;
 	}
+	pthread_join(data.check_dead,NULL);
 	i = 0;
 	while (i < data.number_of_philo)
 	{

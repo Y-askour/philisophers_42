@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:06:19 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/22 19:40:49 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/23 11:03:12 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct args
 	int					eaten;
 	pthread_mutex_t	*forks;
 	long	printtime;
+	pthread_t	check_dead;
 }	t_info;
 
 typedef struct philo
@@ -50,5 +51,6 @@ int	arguments_check(int argc, char **argv);
 int	parse_init(t_info *args, int argc, char **argv);
 long	get_current_time();
 void	get_mssg(t_info *data,int id,char *state);
+void *check_dead_p(void	*arg);
 
 #endif
