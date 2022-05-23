@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/23 14:49:19 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/23 14:54:48 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -34,13 +34,11 @@ int	philo_eat(t_philo *philo, int i)
 	{
 		pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_unlock(philo->leftfork);
-		get_mssg(philo->info, philo->id, "has eating");
 	}
 	else
 	{
 		pthread_mutex_unlock(philo->leftfork);
 		pthread_mutex_unlock(philo->right_fork);
-		get_mssg(philo->info, philo->id, "has eating");
 	}
 	philo->num_eat++;
 	return (0);
