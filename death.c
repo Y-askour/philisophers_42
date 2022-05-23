@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/22 15:42:04 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/23 18:07:18 by yaskour          ###   ########.fr       */
+/*   Created: 2022/05/23 16:34:22 by yaskour           #+#    #+#             */
+/*   Updated: 2022/05/23 18:02:13 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_current_time(void)
+void	*check_dead_p(void	*arg)
 {
-	struct timeval	time;
-	long			timenow;
+	t_philo	*philo;
+	t_info	*data;
 
-	gettimeofday(&time, NULL);
-	timenow = (time.tv_sec * 1000) + (time.tv_usec / 1000);
-	return (timenow);
-}
-
-void	ft_usleep(long time)
-{
-	long int start;
-
-	start = 0;
-	start = get_current_time();
-	/*while ((get_current_time() - start) < time)
-		usleep(50);*/
+	philo = (t_philo *)arg;
+	data = philo->info;
 	while (1)
-		{
-			if (get_current_time() - start	>= time )
-				break;
-			usleep(100);
-		}
-	return ;
+	{
+			while (get_current_time() - philo->last_meal
+				> data->time_to_die)
+			{
+				data->stop = 1;
+				get_mssg(philo->info, 1, "died\n");
+				return 0;
+			}
+	}
+	return (NULL);
 }
