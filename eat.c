@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:36:28 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/24 13:13:48 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/24 14:43:03 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,10 @@ int	philo_eat(t_philo *philo, int i)
 		pthread_mutex_lock(philo->right_fork);
 		get_mssg(philo->info, philo->id, "has taken a fork");
 	}
-	//if (philo->id == 1)
-	//{
-	//	pthread_mutex_lock(philo->leftfork);
-	//	get_mssg(philo->info, philo->id, "has taken a fork");
-	//	pthread_mutex_lock(philo->right_fork);
-	//	get_mssg(philo->info, philo->id, "has taken a fork");
-	//}
-	//else
-//	{
-		//pthread_mutex_lock(philo->right_fork);
-		//get_mssg(philo->info, philo->id, "has taken a fork");
-		//pthread_mutex_lock(philo->leftfork);
-		//get_mssg(philo->info, philo->id, "has taken a fork");
-//	}
 	get_mssg(philo->info, philo->id, "is eating");
 	philo->last_meal = get_current_time();
 	ft_usleep(philo->info->time_to_eat);;
 	philo->num_eat++;
-	//if (philo->id != 1)
-	//{
-	//	pthread_mutex_unlock(philo->right_fork);
-	//	pthread_mutex_unlock(philo->leftfork);
-	//}
-	//else
-	//{
-	//
 	if(philo->id % 2 != 0)
 	{
 			pthread_mutex_unlock(philo->leftfork);
