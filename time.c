@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 15:42:04 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/23 18:07:18 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/24 12:47:14 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	ft_usleep(long time)
 
 	start = 0;
 	start = get_current_time();
-	/*while ((get_current_time() - start) < time)
-		usleep(50);*/
-	while (1)
-		{
-			if (get_current_time() - start	>= time )
-				break;
-			usleep(100);
-		}
+	while ((get_current_time() - start) < time)
+		usleep(50);
+	//while (1)
+	//	{
+	//		if (get_current_time() - start	>= time )
+	//			break;
+	//		usleep(100);
+	//	}
 	return ;
 }
