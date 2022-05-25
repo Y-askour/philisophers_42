@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:34:22 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/24 13:02:12 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:45:24 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,24 @@ void	*check_dead_p(void	*arg)
 {
 	t_philo	*philo;
 	t_info	*data;
+	int 		i = 0;
 
 	philo = (t_philo *)arg;
 	data = philo[0].info;
 	while (1)
 	{
-			if (get_current_time() - philo[0].last_meal
-				> data->time_to_die)
+		i = 0;
+		while(i < data->number_of_philo)
+		{
+			if ((get_current_time() - philo[i].last_meal)  > data->time_to_die)
 			{
+
 				data->stop = 1;
 				get_mssg(philo->info, 1, "died\n");
 				exit(1);
 			}
+			i++;
+		}
 	}
 	return (NULL);
 }
-
-//
-//void	*check_dead_p(void	*arg)
-//{
-//	t_philo *philos= (t_philo *)arg;
-//	//int	time_to_kill = get_current_time() + philos[0].info->time_to_die;
-//	while(1)
-//	{
-//		get_mssg(philos[0].info,50,"test");
-//			printf("time to kill = %lu\n",philos[0].last_meal - get_current_time());
-//			sleep(2);
-//		//if (get_current_time() == time_to_kill)
-//		{
-//			//get_mssg(data,50,"\n-------- death test ----------\n");
-//			break ;
-//		}
-//	}
-//	return NULL;
-//}
-

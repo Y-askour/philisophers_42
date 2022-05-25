@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/23 19:11:19 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/25 16:38:12 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -28,7 +28,6 @@ int	main(int ac, char **av)
 	t_philo	*philos;
 	int		i;
 
-	data.start_time = get_current_time();
 	pthread_mutex_init(&data.write, NULL);
 	if (!arguments_check(ac, av))
 		return (0);
@@ -39,7 +38,6 @@ int	main(int ac, char **av)
 	}
 	philos = malloc(sizeof(t_philo) * data.number_of_philo);
 	init_forks(&data);
-	pthread_create(&data.check_dead, NULL, &check_dead_p,philos);
 	init_philo(&data, philos);
 	i = 0;
 	while (i < data.number_of_philo)

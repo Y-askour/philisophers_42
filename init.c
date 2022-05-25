@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:34:54 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/24 13:06:39 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:44:01 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_philo(t_info *data, t_philo *philos)
 	int	i;
 
 	i = 0;
+	data->start_time = get_current_time();
 	while (i < data->number_of_philo)
 	{
 		philos[i].id = i + 1;
@@ -40,9 +41,10 @@ void	init_philo(t_info *data, t_philo *philos)
 			philos[i].leftfork = &data->forks[i - 1];
 		philos[i].info = data;
 		philos[i].num_eat = 0;
-		philos[i].last_meal = philos[i].info->start_time;
+		philos[i].last_meal = data->start_time;
 		philos[i].info->stop = 0;
 		pthread_create(&philos[i].my_thread, NULL, &routine, &philos[i]);
 		i++;
 	}
+	pthread_create(&data->check_dead, NULL, &check_dead_p,philos);
 }
