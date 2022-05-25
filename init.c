@@ -46,5 +46,5 @@ void	init_philo(t_info *data, t_philo *philos)
 		pthread_create(&philos[i].my_thread, NULL, &routine, &philos[i]);
 		i++;
 	}
-	pthread_create(&data->check_dead, NULL, &check_dead_p,philos);
+	pthread_create(&data->check_dead, NULL, &check_dead_p, philos);
 }

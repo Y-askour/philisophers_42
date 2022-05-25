@@ -24,17 +24,11 @@ long	get_current_time(void)
 
 void	ft_usleep(long time)
 {
-	long int start;
+	long int	start;
 
 	start = 0;
 	start = get_current_time();
 	while ((get_current_time() - start) < time)
 		usleep(50);
-	//while (1)
-	//	{
-	//		if (get_current_time() - start	>= time )
-	//			break;
-	//		usleep(100);
-	//	}
 	return ;
 }

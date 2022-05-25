@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 #include "philo.h"
 
-
-
 void	get_mssg(t_info *data, int id, char *state)
 {
 	pthread_mutex_lock(&data->write);
@@ -20,7 +18,6 @@ void	get_mssg(t_info *data, int id, char *state)
 	printf("%lu       %d   %s \n", data->printtime, id, state);
 	pthread_mutex_unlock(&data->write);
 }
-
 
 int	main(int ac, char **av)
 {

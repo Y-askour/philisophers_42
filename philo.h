@@ -28,7 +28,6 @@ typedef struct args
 	int				stop;
 	long			start_time;
 	pthread_mutex_t	write;
-	// how many philos that eat must_eat
 	int				eaten;
 	pthread_mutex_t	*forks;
 	long			printtime;
