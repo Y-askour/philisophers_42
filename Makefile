@@ -23,6 +23,7 @@ $(NAME): $(objs) util
 
 clean :
 	@rm -rf $(objs)
+	@make clean -C libft
 fclean:clean
 	@rm -rf $(NAME)
 
