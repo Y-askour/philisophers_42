@@ -30,7 +30,7 @@ void	*check_dead_p(void	*arg)
 			{
 				data->stop = 1;
 				get_mssg(philo->info, 1, "died\n");
-				exit(0);
+				return (0);
 			}
 			i++;
 		}
