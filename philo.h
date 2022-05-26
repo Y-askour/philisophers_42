@@ -54,6 +54,6 @@ void	*check_dead_p(void	*arg);
 void	ft_usleep(long time);
 void	init_forks(t_info *data);
 void	init_philo(t_info *data, t_philo *philos);
-int		philo_eat(t_philo *philo, int i);
+int		philo_eat(t_philo *philo);
 void	*routine(void	*arg);
 #endif

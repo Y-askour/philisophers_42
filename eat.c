@@ -21,7 +21,7 @@ void	*routine(void	*arg)
 	i = 0;
 	while (philo->info->stop == 0)
 	{
-		philo_eat(philo, i);
+		philo_eat(philo);
 		get_mssg(philo->info, philo->id, "is sleeping");
 		ft_usleep(philo->info->time_to_sleep);
 		get_mssg(philo->info, philo->id, "is thinking");
@@ -62,7 +62,7 @@ void	unlock_fork(t_philo *philo)
 	}
 }
 
-int	philo_eat(t_philo *philo, int i)
+int	philo_eat(t_philo *philo)
 {
 	lock_fork(philo);
 	get_mssg(philo->info, philo->id, "is eating");
