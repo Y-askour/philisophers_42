@@ -83,6 +83,8 @@ int	philo_eat(t_philo *philo)
 	philo->last_meal = get_current_time();
 	ft_usleep(philo->info->time_to_eat);
 	philo->num_eat++;
+	if (philo->num_eat == philo->info->number_of_times_e_philo_must_eat)
+		philo->info->eaten++;
 	unlock_fork(philo);
 	return (0);
 }

@@ -26,6 +26,11 @@ void	*check_dead_p(void	*arg)
 		i = 0;
 		while (i < data->number_of_philo)
 		{
+			if (data->eaten == data->number_of_philo)
+			{
+				data->stop = 1;
+				return (0);
+			}
 			if ((get_current_time() - philo[i].last_meal) > data->time_to_die)
 			{
 				data->stop = 1;

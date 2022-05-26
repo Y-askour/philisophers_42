@@ -26,7 +26,7 @@ int	parse_init(t_info *args, int argc, char **argv)
 	args->time_to_eat = ft_atoi(argv[3]);
 	args->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 5)
-		args->number_of_times_e_philo_must_eat = 0;
+		args->number_of_times_e_philo_must_eat = -1;
 	else
 	{
 		args->number_of_times_e_philo_must_eat = ft_atoi(argv[5]);
