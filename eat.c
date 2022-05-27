@@ -53,7 +53,6 @@ void	lock_fork(t_philo *philo)
 		if (philo->info->stop == 1)
 			return ;
 		get_mssg(philo->info, philo->id, "has taken a fork");
-		//if (philo->info->number_of_philo > 1)
 		pthread_mutex_lock(philo->right_fork);
 		if (philo->info->stop == 1)
 			return ;

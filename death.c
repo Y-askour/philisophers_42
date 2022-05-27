@@ -34,6 +34,8 @@ void	*check_dead_p(void	*arg)
 			if ((get_current_time() - philo[i].last_meal) > data->time_to_die)
 			{
 				data->stop = 1;
+				if (data->number_of_philo == 1)
+					pthread_mutex_unlock(philo->right_fork);
 				get_mssg(philo->info, 1, "died\n");
 				return (0);
 			}
