@@ -23,11 +23,11 @@ void	*routine(void	*arg)
 	{
 		philo_eat(philo);
 		if (philo->info->stop == 1)
-			return 0;
+			return (0);
 		get_mssg(philo->info, philo->id, "is sleeping");
 		ft_usleep(philo->info->time_to_sleep);
 		if (philo->info->stop == 1)
-			return 0;
+			return (0);
 		get_mssg(philo->info, philo->id, "is thinking");
 		i++;
 	}
@@ -78,7 +78,7 @@ int	philo_eat(t_philo *philo)
 {
 	lock_fork(philo);
 	if (philo->info->stop == 1)
-			return 0;
+		return (0);
 	get_mssg(philo->info, philo->id, "is eating");
 	philo->last_meal = get_current_time();
 	ft_usleep(philo->info->time_to_eat);

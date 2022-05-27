@@ -19,6 +19,27 @@ void	get_mssg(t_info *data, int id, char *state)
 	pthread_mutex_unlock(&data->write);
 }
 
+void	end_all(t_info *data, t_philo *philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		pthread_join(philos[i].my_thread, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		pthread_mutex_destroy(philos[i].right_fork);
+		i++;
+	}
+	pthread_join(data->check_dead, NULL);
+	free(philos);
+	free(data->forks);
+}
+
 int	main(int ac, char **av)
 {
 	t_info	data;
@@ -36,17 +57,5 @@ int	main(int ac, char **av)
 	philos = malloc(sizeof(t_philo) * data.number_of_philo);
 	init_forks(&data);
 	init_philo(&data, philos);
-	i = 0;
-	while (i < data.number_of_philo)
-	{
-		pthread_join(philos[i].my_thread, NULL);
-		i++;
-	}
-	i = 0;
-	while (i < data.number_of_philo)
-	{
-		pthread_mutex_destroy(philos[i].right_fork);
-		i++;
-	}
-	pthread_join(data.check_dead, NULL);
+	end_all(&data, philos);
 }
