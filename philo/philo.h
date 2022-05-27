@@ -28,6 +28,7 @@ typedef struct args
 	int				stop;
 	long			start_time;
 	pthread_mutex_t	write;
+	pthread_mutex_t done;
 	int				eaten;
 	pthread_mutex_t	*forks;
 	long			printtime;

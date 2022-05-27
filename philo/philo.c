@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "philo.h"
 
+
 void	get_mssg(t_info *data, int id, char *state)
 {
 	pthread_mutex_lock(&data->write);
@@ -44,9 +45,9 @@ int	main(int ac, char **av)
 {
 	t_info	data;
 	t_philo	*philos;
-	int		i;
 
 	pthread_mutex_init(&data.write, NULL);
+	pthread_mutex_init(&data.done, NULL);
 	if (!arguments_check(ac, av))
 		return (0);
 	if (!parse_init(&data, ac, av))

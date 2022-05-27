@@ -12,52 +12,54 @@
 
 #include "philo.h"
 
+int i = 0;
 void	*routine(void	*arg)
 {
 	t_philo	*philo;
-	int		i;
 
 	philo = (t_philo *)arg;
-	i = 0;
 	while (philo->info->stop == 0)
 	{
-		philo_eat(philo);
+		if (!philo_eat(philo))
+			return NULL;
 		if (philo->info->stop == 1)
 			return (0);
 		get_mssg(philo->info, philo->id, "is sleeping");
+		if (philo->info->stop == 1)
+			return (0);
 		ft_usleep(philo->info->time_to_sleep);
 		if (philo->info->stop == 1)
 			return (0);
 		get_mssg(philo->info, philo->id, "is thinking");
-		i++;
 	}
 	return (NULL);
 }
 
-void	lock_fork(t_philo *philo)
+int	lock_fork(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		if (philo->info->stop == 1)
-			return ;
+			return 0;
 		get_mssg(philo->info, philo->id, "has taken a fork");
 		pthread_mutex_lock(philo->leftfork);
 		if (philo->info->stop == 1)
-			return ;
+			return 0;
 		get_mssg(philo->info, philo->id, "has taken a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(philo->leftfork);
 		if (philo->info->stop == 1)
-			return ;
+			return 0;
 		get_mssg(philo->info, philo->id, "has taken a fork");
 		pthread_mutex_lock(philo->right_fork);
 		if (philo->info->stop == 1)
-			return ;
+			return 0;
 		get_mssg(philo->info, philo->id, "has taken a fork");
 	}
+	return (1);
 }
 
 void	unlock_fork(t_philo *philo)
@@ -76,9 +78,8 @@ void	unlock_fork(t_philo *philo)
 
 int	philo_eat(t_philo *philo)
 {
-	lock_fork(philo);
-	if (philo->info->stop == 1)
-		return (0);
+	if (!lock_fork(philo))
+		return 0;
 	get_mssg(philo->info, philo->id, "is eating");
 	philo->last_meal = get_current_time();
 	ft_usleep(philo->info->time_to_eat);
