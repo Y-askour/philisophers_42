@@ -1,5 +1,5 @@
 NAME = philo
-cc = gcc
+cc = cc
 flags = -Wall -Wextra -Werror
 scrs = death.c \
 			 eat.c \
@@ -19,7 +19,8 @@ util:
 $(NAME): $(objs) util
 	$(cc) $(flags) $(objs) libft.a -o $(NAME)
 
-
+%.o : %.c philo.h
+	$(cc) $(flags) -c $^ 
 
 clean :
 	@rm -rf $(objs)

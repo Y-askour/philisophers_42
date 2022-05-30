@@ -13,6 +13,9 @@
 
 void	get_mssg(t_info *data, int id, char *state)
 {
+	// hna kayn l7el
+	if (data->stop == 1 && ft_strncmp(state,"died",4))
+		return ;
 	pthread_mutex_lock(&data->write);
 	data->printtime = get_current_time() - data->start_time;
 	printf("%lu       %d   %s \n", data->printtime, id, state);
@@ -44,7 +47,6 @@ int	main(int ac, char **av)
 {
 	t_info	data;
 	t_philo	*philos;
-	int		i;
 
 	pthread_mutex_init(&data.write, NULL);
 	if (!arguments_check(ac, av))
