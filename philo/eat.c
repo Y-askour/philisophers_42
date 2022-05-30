@@ -34,7 +34,6 @@ void	*routine(void	*arg)
 	return (NULL);
 }
 
-
 void	lock_fork(t_philo *philo)
 {
 	if (philo->id % 2 == 0)

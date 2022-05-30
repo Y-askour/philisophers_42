@@ -13,8 +13,7 @@
 
 void	get_mssg(t_info *data, int id, char *state)
 {
-	// hna kayn l7el
-	if (data->stop == 1 && ft_strncmp(state,"died",4))
+	if (data->stop == 1 && ft_strncmp(state, "died", 4))
 		return ;
 	pthread_mutex_lock(&data->write);
 	data->printtime = get_current_time() - data->start_time;
