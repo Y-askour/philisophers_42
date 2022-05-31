@@ -14,9 +14,9 @@
 # define PHILO_H
 # include <pthread.h>
 # include <sys/time.h>
-# include "libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
+#	include <stdlib.h>
 
 typedef struct args
 {
@@ -56,4 +56,10 @@ void	init_forks(t_info *data);
 void	init_philo(t_info *data, t_philo *philos);
 int		philo_eat(t_philo *philo);
 void	*routine(void	*arg);
+
+
+// libft
+int	ft_atoi(const char *str);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_isdigit( int arg );
 #endif

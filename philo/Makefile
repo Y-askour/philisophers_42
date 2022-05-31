@@ -6,25 +6,22 @@ scrs = death.c \
 			 init.c \
 			 parse.c \
 			 philo.c \
-			 time.c
+			 time.c \
+			 utils.c
 
 objs = $(scrs:.c=.o)
 
 all : $(NAME)
 
-util:
-	@make -C libft
-	@mv libft/libft.a .
 
-$(NAME): $(objs) util
-	$(cc) $(flags) $(objs) libft.a -o $(NAME)
+$(NAME): $(objs)
+	$(cc) $(flags) $(objs) -o $(NAME)
 
 %.o : %.c philo.h
 	$(cc) $(flags) -c $^ 
 
 clean :
 	@rm -rf $(objs)
-	@make clean -C libft
 fclean:clean
 	@rm -rf $(NAME)
 
