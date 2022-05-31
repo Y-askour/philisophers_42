@@ -12,6 +12,7 @@
 
 #include "philo.h"
 
+
 int	check_dead_helper(t_philo *philo, t_info *data, int i)
 {
 	if (data->eaten == data->number_of_philo)

@@ -1,5 +1,15 @@
 #include "philo.h"
 
+size_t	ft_strlen( const char *theString )
+{
+	unsigned int	i;
+
+	i = 0;
+	while (*theString++)
+		i++;
+	return (i);
+}
+
 int	ft_isdigit( int arg )
 {
 	if (arg >= '0' && arg <= '9')

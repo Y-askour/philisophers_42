@@ -12,6 +12,7 @@
 
 #include "philo.h"
 
+
 void	init_forks(t_info *data)
 {
 	int	i;

@@ -18,6 +18,8 @@
 # include <stdio.h>
 #	include <stdlib.h>
 
+
+
 typedef struct args
 {
 	int				number_of_philo;
@@ -62,4 +64,5 @@ void	*routine(void	*arg);
 int	ft_atoi(const char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	ft_isdigit( int arg );
+size_t	ft_strlen( const char *theString );
 #endif

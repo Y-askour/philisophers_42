@@ -45,8 +45,10 @@ int	ft_is_digit(char *str)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == '+' || str[i] == '-')
+			i++;
 		if (!ft_isdigit(str[i]))
-			return (0);
+			return(0);
 		i++;
 	}
 	return (1);
@@ -58,12 +60,24 @@ int	arguments_check(int argc, char **argv)
 
 	index = 1;
 	if (argc < 5 || argc > 6)
-		return (0);
-	while (argv[index])
 	{
-		if (!ft_is_digit(argv[index]) || (!ft_atoi(argv[index])))
+		printf("invalid number of arguments\n");
+		return (0);
+	}
+	int i = 1;
+	while(argv[i])
+	{
+		if (!ft_strlen(argv[i]))
+		{
+			printf("empty arg is invalid\n");
 			return (0);
-		index++;
+		}
+		if (!ft_is_digit(argv[i]))
+		{
+			printf("error invalid numbers\n");
+			return(0);
+		}
+		i++;
 	}
 	return (1);
 }

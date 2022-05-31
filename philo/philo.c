@@ -47,12 +47,16 @@ int	main(int ac, char **av)
 	t_info	data;
 	t_philo	*philos;
 
-	pthread_mutex_init(&data.write, NULL);
+	if (pthread_mutex_init(&data.write, NULL))
+	{
+			printf("mutex init error\n");
+			return (0);
+	}
 	if (!arguments_check(ac, av))
 		return (0);
 	if (!parse_init(&data, ac, av))
 	{
-		printf("invalid arguments \n");
+		printf(" numbers that are <= 0 are not valid  \n");
 		return (0);
 	}
 	philos = malloc(sizeof(t_philo) * data.number_of_philo);
