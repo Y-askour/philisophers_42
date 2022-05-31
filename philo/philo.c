@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yaskour <yaskour@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:00:31 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/25 16:38:12 by yaskour          ###   ########.fr       */
+/*   Created: 2022/05/31 12:11:12 by yaskour           #+#    #+#             */
+/*   Updated: 2022/05/31 12:11:14 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "philo.h"
 
 void	get_mssg(t_info *data, int id, char *state)
@@ -49,8 +50,8 @@ int	main(int ac, char **av)
 
 	if (pthread_mutex_init(&data.write, NULL))
 	{
-			printf("mutex init error\n");
-			return (0);
+		printf("mutex init error\n");
+		return (0);
 	}
 	if (!arguments_check(ac, av))
 		return (0);

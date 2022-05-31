@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yaskour <yaskour@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:06:19 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/23 18:49:06 by yaskour          ###   ########.fr       */
+/*   Created: 2022/05/31 12:11:40 by yaskour           #+#    #+#             */
+/*   Updated: 2022/05/31 12:11:43 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdio.h>
-#	include <stdlib.h>
-
-
+# include <stdlib.h>
 
 typedef struct args
 {
@@ -58,11 +56,8 @@ void	init_forks(t_info *data);
 void	init_philo(t_info *data, t_philo *philos);
 int		philo_eat(t_philo *philo);
 void	*routine(void	*arg);
-
-
-// libft
-int	ft_atoi(const char *str);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-int	ft_isdigit( int arg );
+int		ft_atoi(const char *str);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_isdigit( int arg );
 size_t	ft_strlen( const char *theString );
 #endif

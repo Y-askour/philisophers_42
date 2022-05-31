@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yaskour <yaskour@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 16:34:54 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/25 17:44:01 by yaskour          ###   ########.fr       */
+/*   Created: 2022/05/31 12:10:53 by yaskour           #+#    #+#             */
+/*   Updated: 2022/05/31 12:10:55 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 void	init_forks(t_info *data)
 {

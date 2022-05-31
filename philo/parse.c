@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yaskour <yaskour@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/22 14:16:57 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/22 15:25:50 by yaskour          ###   ########.fr       */
+/*   Created: 2022/05/31 12:11:02 by yaskour           #+#    #+#             */
+/*   Updated: 2022/05/31 12:11:04 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "philo.h"
 
 int	limits_check(t_info *args)
@@ -48,7 +49,7 @@ int	ft_is_digit(char *str)
 		if (str[i] == '+' || str[i] == '-')
 			i++;
 		if (!ft_isdigit(str[i]))
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
@@ -57,6 +58,7 @@ int	ft_is_digit(char *str)
 int	arguments_check(int argc, char **argv)
 {
 	int	index;
+	int	i;
 
 	index = 1;
 	if (argc < 5 || argc > 6)
@@ -64,8 +66,8 @@ int	arguments_check(int argc, char **argv)
 		printf("invalid number of arguments\n");
 		return (0);
 	}
-	int i = 1;
-	while(argv[i])
+	i = 1;
+	while (argv[i])
 	{
 		if (!ft_strlen(argv[i]))
 		{
@@ -75,7 +77,7 @@ int	arguments_check(int argc, char **argv)
 		if (!ft_is_digit(argv[i]))
 		{
 			printf("error invalid numbers\n");
-			return(0);
+			return (0);
 		}
 		i++;
 	}

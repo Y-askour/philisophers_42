@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yaskour <yaskour@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 16:34:22 by yaskour           #+#    #+#             */
-/*   Updated: 2022/05/27 15:29:30 by yaskour          ###   ########.fr       */
+/*   Created: 2022/05/31 12:10:29 by yaskour           #+#    #+#             */
+/*   Updated: 2022/05/31 12:10:33 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	check_dead_helper(t_philo *philo, t_info *data, int i)
 {
